@@ -1,5 +1,4 @@
 from Tkinter import *
-
 def mainWindow():
     ### Main GUI
     #Main Window
