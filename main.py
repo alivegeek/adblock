@@ -1,4 +1,5 @@
 from Tkinter import *
+
 def mainWindow():
     ### Main GUI
     #Main Window
@@ -24,7 +25,7 @@ def mainWindow():
 
     ### Top Frame - Begin Instructions Label
     labelframe_widget = LabelFrame(root, text="Instructions")
-    label_widget = Label(labelframe_widget, justify=LEFT, text="This App blocks Ads, Malware Sites and other undesirable internet traffic using your hosts file. Some virus scanners including Windows Defender \n see modifying the Hosts file as a hijack attempt due to its ability to redirect traffic maliciously. (e.g. facebook.com to phishingscamfacebook.com)\n \n Select the block lists you would like to use from the list below.")
+    label_widget = Label(labelframe_widget, justify=LEFT, text="This App blocks Ads, Malware Sites and other undesirable internet traffic using your hosts file. Some virus scanners including Windows Defender \n see modifying the Hosts file as a hijack attempt due to its ability to redirect traffic maliciously. \n \n Select the block lists you would like to use from the list below.")
     labelframe_widget.grid(column=1)
     label_widget.grid(column=1)
 
@@ -80,7 +81,7 @@ def aboutWindow():
     Label(win, text=message,wraplength=400, font=('helvetica', 6, 'italic')).pack()
     # quit child window and return to root window
     # the button is optional here, simply use the corner x of the child window
-    Button(win, text='OK', command=root.quit).pack()
+    Button(win, text='OK', command=win.destroy ).pack()
 
 
 if __name__ == "__main__":
