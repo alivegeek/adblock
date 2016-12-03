@@ -1,5 +1,4 @@
 import urllib2
-from easygui import *
 import admin
 import shutil
 #Dict that matches the descriptions from the main window to the actual URLS of th ehosts files - THIS MUST MATCH availableLists verbatim!
@@ -11,30 +10,6 @@ def getAdmin():
     if not admin.isUserAdmin():
         admin.runAsAdmin()
 
-
-def main():
-    blocklist = userSelect()
-    urlsHosts = []
-    for i in range(len(blocklist)):
-
-        if blocklist[i] in blocklistsDict.keys():
-            urlsHosts.append(blocklistsDict[blocklist[i]])
-    dedupe(getHosts(urlsHosts))
-    backupHostsFile()
-# Menu prompts user to select what host files to add to their own
-def userSelect():
-    title = 'AdBlock with Hosts File v0.1 by NHolbrook'
-    welcomeMsg = "This App blocks Ads, Malware and other undersirable internet traffic using your hosts file. Select the block lists you would like to use from the list below."
-    availableLists = ["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly",
-                      "2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.",
-                      "3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm",
-                      "4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.",]
-
-    chosenLists = multchoicebox(welcomeMsg,title=title, choices=availableLists )
-
-    return chosenLists
-
-
 #Downloads each of the hosts files chosen aboce and stores each line as an entry in a list
 def getHosts(urlHosts):
     hostLines = []
@@ -43,11 +18,7 @@ def getHosts(urlHosts):
         opener = urllib2.build_opener()
         opener.addheaders = [('User-Agent', 'Mozilla/5.0'), ]
         response = opener.open(url)
-        hostdata = response.read()        # hostLines.append()        # a.striplines    # print dedupedList
-        # print hostLines
-
-
-
+        hostdata = response.read()
         return hostdata
 
 
@@ -79,11 +50,9 @@ def writeHosts():
     f = open(hostsPath + "hosts", "w")
     for each in dedupedList:
         f.write(str(each) + "\n")
-
     f.close
 
 if __name__ == '__main__':
-    blocklist = userSelect()
     urlsHosts = []
     for i in range(len(blocklist)):
 
