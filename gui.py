@@ -11,7 +11,9 @@ def getAdmin():
         admin.runAsAdmin()
 
 #Downloads each of the hosts files chosen aboce and stores each line as an entry in a list
-def getHosts(urlHosts):
+
+### New getHosts
+def getHosts(userRequestedHostFiles):
     hostLines = []
     hostLinesFix = []
     def getEach(url):
@@ -22,12 +24,35 @@ def getHosts(urlHosts):
         return hostdata
 
 
-    for each in urlHosts:
+    for each in userRequestedHostFiles:
         hostLines.append(getEach(each))
     for each in hostLines:
        a = each.splitlines()
        hostLinesFix.append(a)
+
+    print hostLinesFix
     return hostLinesFix
+
+
+
+
+# def getHosts(urlHosts):
+#     hostLines = []
+#     hostLinesFix = []
+#     def getEach(url):
+#         opener = urllib2.build_opener()
+#         opener.addheaders = [('User-Agent', 'Mozilla/5.0'), ]
+#         response = opener.open(url)
+#         hostdata = response.read()
+#         return hostdata
+#
+#
+#     for each in urlHosts:
+#         hostLines.append(getEach(each))
+#     for each in hostLines:
+#        a = each.splitlines()
+#        hostLinesFix.append(a)
+#     return hostLinesFix
 
 #Removes any duplicate entries from the list
 global dedupedList
@@ -53,16 +78,16 @@ def writeHosts():
     f.close
 
 if __name__ == '__main__':
-    urlsHosts = []
-    for i in range(len(blocklist)):
+    # urlsHosts = []
+    # for i in range(len(blocklist)):
+    #
+    #     if blocklist[i] in blocklistsDict.keys():
+    #         urlsHosts.append(blocklistsDict[blocklist[i]])
+    # dedupe(getHosts(urlsHosts))
+    # backupHostsFile()
+    # writeHosts()
 
-        if blocklist[i] in blocklistsDict.keys():
-            urlsHosts.append(blocklistsDict[blocklist[i]])
-    dedupe(getHosts(urlsHosts))
-    backupHostsFile()
-    writeHosts()
-
-
+getHosts():
 
 
 

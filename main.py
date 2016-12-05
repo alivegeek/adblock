@@ -33,33 +33,34 @@ def mainWindow():
 
     choicesframe_widget = Frame(root)
     #List of hosts file sources for user to choose
-    #listbox_entries = ["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly",
-        #                  "2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.",
-      #                    "3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm",
-           #               "4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly."]
-    listbox_entries = {'1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"': 0, '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.': 0, '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm': 0, '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.': 0}
-    #Draw checkboxes for each option and a select all button
-    for cboxes in listbox_entries:
-        listbox_entries[cboxes] = Variable()
-        l = Checkbutton(root, text=listbox_entries, variable=listbox_entries[cboxes])
-    
-    
-    
-    def create_cboxes():
-        for index, item in enumerate(listbox_entries):
-            cboxes.append(Checkbutton(root, text = item,))
-            cboxes[index].grid(column=1, sticky=W)
+
+    # listbox_entries = {'1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"': 0, '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.': 0, '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm': 0, '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.': 0}
+    global listbox_entries
+
+    listbox_entries = ['1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"', '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.', '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm', '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.']
+
+
+    enable = {'ID1050': 0, 'ID1106': 0, 'ID1104': 0, 'ID1102': 0}
+    for machine in enable:
+        enable[machine] = BooleanVar()
+        l = Checkbutton(root, text=machine, variable=enable[machine])
+        l.grid()
+
+
     def select_all():
         for i in cboxes:
             i.select()
     def deselect_all():
         for i in cboxes:
             i.deselect()
+    def runTest():
+        print enable["ID1050"].get()
+
 
 
     cboxes = []
     box_values = {1:0, 2: 0, 3: 0, 4: 0}
-    create_cboxes()
+    # create_cboxes()
     Button(root, text = 'Select All', command = select_all).grid(row=5,column=1,sticky=W)
     Button(root, text = 'Select None', command = deselect_all).grid(row=6,column=1, sticky=W)
 
@@ -69,6 +70,8 @@ def mainWindow():
     quit_button = Button(buttonsframe_widget, text="Quit", command=root.quit)
     patch_button.grid(row=0)
     quit_button.grid(row=0,column=1, )
+    test_button = Button(buttonsframe_widget, text="Test", command=runTest)
+    test_button.grid()
 
 
     root.mainloop()
