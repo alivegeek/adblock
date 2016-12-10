@@ -11,6 +11,9 @@ def getAdmin():
         admin.runAsAdmin()
 
 #Downloads each of the hosts files chosen aboce and stores each line as an entry in a list
+def user_choices(list):
+    if list[0] == true
+        if each == True:
 
 ### New getHosts
 def getHosts(userRequestedHostFiles):

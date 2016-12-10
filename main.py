@@ -1,5 +1,5 @@
 from Tkinter import *
-
+from getHosts import *
 def mainWindow():
     ### Main GUI
     #Main Window
@@ -34,29 +34,32 @@ def mainWindow():
     choicesframe_widget = Frame(root)
     #List of hosts file sources for user to choose
 
-    # listbox_entries = {'1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"': 0, '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.': 0, '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm': 0, '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.': 0}
     global listbox_entries
 
-    listbox_entries = ['1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"', '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.', '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm', '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.']
+    # listbox_entries = ['1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"', '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.', '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm', '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.']
 
-
-    enable = {'ID1050': 0, 'ID1106': 0, 'ID1104': 0, 'ID1102': 0}
-    for machine in enable:
-        enable[machine] = BooleanVar()
-        l = Checkbutton(root, text=machine, variable=enable[machine])
-        l.grid()
+    listbox_entries = {'1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly': 0, '2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.': 0, '3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm': 0, '4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.': 0}
+    checkbox_object = []
+    # listbox_entries = {'ID1050': 0, 'ID1106': 0, 'ID1104': 0, 'ID1102': 0}
+    for each_listbox_item in sorted(listbox_entries):
+        listbox_entries[each_listbox_item] = BooleanVar()
+        l = Checkbutton(root, text=each_listbox_item, variable=listbox_entries[each_listbox_item])
+        l.grid(column=1, sticky=W)
+        checkbox_object.append(l)
 
 
     def select_all():
-        for i in cboxes:
-            i.select()
+        for each in checkbox_object:
+            each.select()
+
     def deselect_all():
-        for i in cboxes:
-            i.deselect()
+        for each in checkbox_object:
+            each.deselect()
     def runTest():
-        print enable["ID1050"].get()
-
-
+        print listbox_entries["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"].get()
+        print listbox_entries['2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.'].get()
+        print listbox_entries['3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm'].get()
+        print listbox_entries['4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.'].get()
 
     cboxes = []
     box_values = {1:0, 2: 0, 3: 0, 4: 0}
@@ -66,7 +69,7 @@ def mainWindow():
 
     buttonsframe_widget = Frame(root)
     buttonsframe_widget.grid(row=10,column=0,columnspan=2,sticky=S)
-    patch_button = Button(buttonsframe_widget, text="Patch")
+    patch_button = Button(buttonsframe_widget, text="Patch", command=getHosts(list))
     quit_button = Button(buttonsframe_widget, text="Quit", command=root.quit)
     patch_button.grid(row=0)
     quit_button.grid(row=0,column=1, )
