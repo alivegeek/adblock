@@ -56,10 +56,25 @@ def mainWindow():
         for each in checkbox_object:
             each.deselect()
     def runTest():
-        print listbox_entries["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"].get()
-        print listbox_entries['2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.'].get()
-        print listbox_entries['3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm'].get()
-        print listbox_entries['4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.'].get()
+        choices = []
+        #
+        # print listbox_entries["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"].get()
+        # print listbox_entries['2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.'].get()
+        # print listbox_entries['3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm'].get()
+        # print listbox_entries['4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.'].get()
+
+        choices.append(listbox_entries["1. The AdAway hosts file (adaway.org) - Blocks Ads, Updated Regularly"].get())
+        choices.append(listbox_entries['2. Dan Pollock - SomeonewhoCares.org (Blocks Ads, Shock Sites, HiJacks, Malware, Spyware, Tracking, etc.'].get())
+        choices.append(listbox_entries['3. MVP Hosts File - http://winhelp2002.mvps.org/hosts.htm'].get())
+        choices.append(listbox_entries['4. Malware Domain List at http://www.malwaredomainlist.com/, updated regularly.'].get())
+        # a = getHosts.getHosts(choices)
+        # hosts = getHosts2(choices)
+        # dedupeHosts(hosts)
+        backupHostsFile()
+        # print type(dedupedHosts)
+        # writeHosts(dedupeHosts)
+        writeHosts(dedupeHosts(getHosts2(choices)))
+
 
     cboxes = []
     box_values = {1:0, 2: 0, 3: 0, 4: 0}
@@ -69,10 +84,10 @@ def mainWindow():
 
     buttonsframe_widget = Frame(root)
     buttonsframe_widget.grid(row=10,column=0,columnspan=2,sticky=S)
-    patch_button = Button(buttonsframe_widget, text="Patch", command=getHosts(list))
+    patch_button = Button(buttonsframe_widget, text="Patch")
     quit_button = Button(buttonsframe_widget, text="Quit", command=root.quit)
     patch_button.grid(row=0)
-    quit_button.grid(row=0,column=1, )
+    quit_button.grid(row=0,column=1, )  
     test_button = Button(buttonsframe_widget, text="Test", command=runTest)
     test_button.grid()
 
@@ -97,4 +112,5 @@ def aboutWindow():
 
 
 if __name__ == "__main__":
+    getAdmin()
     mainWindow()
